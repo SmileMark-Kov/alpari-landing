@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Альпари — Торгуй с нами, зарабатывай больше</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --success: #00d9ff;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --bg: #0a0a0a;
+            --card: #1a1a1a;
+            --border: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid var(--highlight);
+            color: var(--highlight);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: var(--success);
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--highlight);
+            color: white;
+            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--success);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--highlight), var(--success));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .feature-icon {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, var(--highlight), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .calculator {
+            background: linear-gradient(180deg, var(--primary), var(--bg));
+            padding: 5rem 2rem;
+        }
+
+        .calc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .calc-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calc-input-group {
+            margin-bottom: 2rem;
+        }
+
+        .calc-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .calc-input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .calc-input-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: var(--highlight);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+        }
+
+        .calc-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(0, 217, 255, 0.1));
+            border: 1px solid var(--highlight);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .calc-result-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .calc-result-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--highlight), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .referral-section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .referral-box {
+            background: var(--card);
+            border: 2px dashed var(--accent);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .referral-link {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: var(--success);
+            word-break: break-all;
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .copy-btn {
+            background: var(--success);
+            color: var(--bg);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .copy-btn.copied {
+            background: var(--highlight);
+            color: white;
+        }
+
+        .qr-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            max-width: 800px;
+            margin: 2rem auto;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+
+        .qr-code-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code-wrapper img {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+            background: white;
+            padding: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .qr-label {
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .qr-info {
+            text-align: left;
+        }
+
+        .qr-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .qr-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .qr-steps {
+            list-style: none;
+        }
+
+        .qr-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .qr-steps li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: var(--card);
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, var(--highlight), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .testimonials {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 4rem;
+            color: var(--highlight);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--highlight), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info span {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-cta {
+            background: linear-gradient(135deg, var(--highlight), var(--accent));
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .risk-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            color: #ffc107;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ticker {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            padding: 0.75rem 0;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        .ticker-up { color: #00d9a3; }
+        .ticker-down { color: var(--highlight); }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .stats-bar { gap: 1.5rem; }
+            .stat-value { font-size: 1.8rem; }
+            .calc-container { padding: 1.5rem; }
+            .calc-result-value { font-size: 2rem; }
+            .qr-section { grid-template-columns: 1fr; text-align: center; }
+            .qr-info { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticker">
+        <div class="ticker-content" id="ticker"></div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🔥 Реферальная программа 2026</div>
+            <h1>Зарабатывай на трейдинге<br><span>без риска</span></h1>
+            <p class="hero-subtitle">
+                Приглашай трейдеров в Альпари и получай до <strong>60% от спреда</strong> с каждой сделки.
+                Твой друг получает бонус до $500 — выгода для всех.
+            </p>
+            <div class="cta-group">
+                <a href="#referral" class="btn btn-primary" onclick="scrollToRef(event)">
+                    Получить реферальную ссылку
+                </a>
+                <a href="#calculator" class="btn btn-secondary" onclick="scrollToCalc(event)">
+                    Рассчитать доход
+                </a>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">4M+</div>
+                    <div class="stat-label">Клиентов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">150+</div>
+                    <div class="stat-label">Стран</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">25+</div>
+                    <div class="stat-label">Лет на рынке</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-label">Комиссия</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title fade-in">Почему трейдеры выбирают Альпари</h2>
+        <p class="section-subtitle fade-in">Мировой брокер с безупречной репутацией с 1998 года</p>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">💰</div>
+                <h3>Высокие выплаты</h3>
+                <p>До 60% от спреда с каждой сделки реферала. Чем больше торгует ваш друг — тем больше ваш пассивный доход.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎁</div>
+                <h3>Бонусы для друзей</h3>
+                <p>Ваши рефералы получают приветственный бонус до $500 в Reward points. Привлекать легче, когда есть выгода.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">⚡</div>
+                <h3>Мгновенные выплаты</h3>
+                <p>Автоматические начисления комиссии в личный кабинет партнера. Выводите когда удобно.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📊</div>
+                <h3>Прозрачная статистика</h3>
+                <p>Отслеживайте активность рефералов в реальном времени. Полные отчеты по торговым объемам и начислениям.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🛡️</div>
+                <h3>Надежность</h3>
+                <p>Лицензия FSC, 25+ лет на рынке, 4+ миллиона клиентов. Работайте с проверенным брендом.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🚀</div>
+                <h3>Готовые материалы</h3>
+                <p>Баннеры, лендинги, виджеты и другие промо-материалы в вашем партнерском кабинете.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator" id="calculator">
+        <div class="calc-container fade-in">
+            <h2 class="calc-title">Калькулятор дохода</h2>
+            <div class="calc-input-group">
+                <label>Количество привлеченных трейдеров</label>
+                <input type="range" id="traders" min="1" max="100" value="10" oninput="updateCalc()">
+                <div class="calc-value">
+                    <span>1</span>
+                    <span id="traders-val" style="color: var(--success); font-weight: 700;">10</span>
+                    <span>100</span>
+                </div>
+            </div>
+            <div class="calc-input-group">
+                <label>Средний торговый объем в лотах/месяц на трейдера</label>
+                <input type="range" id="lots" min="1" max="100" value="20" oninput="updateCalc()">
+                <div class="calc-value">
+                    <span>1</span>
+                    <span id="lots-val" style="color: var(--success); font-weight: 700;">20</span>
+                    <span>100</span>
+                </div>
+            </div>
+            <div class="calc-input-group">
+                <label>Средняя комиссия ($/лот)</label>
+                <input type="range" id="commission" min="2" max="20" value="8" step="0.5" oninput="updateCalc()">
+                <div class="calc-value">
+                    <span>$2</span>
+                    <span id="commission-val" style="color: var(--success); font-weight: 700;">$8</span>
+                    <span>$20</span>
+                </div>
+            </div>
+            <div class="calc-result">
+                <div class="calc-result-label">Ваш пассивный доход в месяц</div>
+                <div class="calc-result-value" id="result">$1,600</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="referral-section" id="referral">
+        <h2 class="section-title fade-in">Ваша реферальная ссылка</h2>
+        <p class="section-subtitle fade-in">Поделитесь ссылкой или отсканируйте QR-код</p>
+
+        <div class="referral-box fade-in">
+            <div class="referral-link" id="refLink">
+                https://refreg.click/?Formx=Apk
+            </div>
+            <button class="copy-btn" onclick="copyLink()" id="copyBtn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                </svg>
+                Скопировать ссылку
+            </button>
+        </div>
+
+        <div class="qr-section fade-in">
+            <div class="qr-code-wrapper">
+                <img src="data:image/png;base64,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" alt="QR-код реферальной ссылки">
+                <div class="qr-label">Отсканируйте для быстрого перехода</div>
+            </div>
+            <div class="qr-info">
+                <h3>Быстрый доступ по QR</h3>
+                <p>Не нужно вводить ссылку вручную. Просто наведите камеру телефона на код — и вы сразу перейдете на страницу регистрации.</p>
+                <ul class="qr-steps">
+                    <li>Откройте камеру на смартфоне</li>
+                    <li>Наведите на QR-код</li>
+                    <li>Перейдите по ссылке и зарегистрируйтесь</li>
+                    <li>Начните торговать и получайте бонусы</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="fade-in" style="margin-top: 2rem;">
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Или поделитесь в соцсетях:</p>
+            <div class="cta-group">
+                <button class="btn btn-secondary" onclick="share('telegram')">Telegram</button>
+                <button class="btn btn-secondary" onclick="share('whatsapp')">WhatsApp</button>
+                <button class="btn btn-secondary" onclick="share('vk')">ВКонтакте</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title fade-in">Как это работает</h2>
+        <p class="section-subtitle fade-in">3 простых шага к пассивному доходу</p>
+        <div class="steps">
+            <div class="step fade-in">
+                <div class="step-number">1</div>
+                <h3>Получите ссылку</h3>
+                <p>Зарегистрируйтесь в партнерской программе Альпари и скопируйте вашу уникальную реферальную ссылку.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">2</div>
+                <h3>Поделитесь</h3>
+                <p>Отправьте ссылку друзьям, подписчикам или разместите на своем сайте / в соцсетях.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">3</div>
+                <h3>Получайте доход</h3>
+                <p>Зарабатывайте до 60% от спреда с каждой сделки ваших рефералов — пожизненно.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title fade-in">Отзывы партнеров</h2>
+        <p class="section-subtitle fade-in">Тысячи людей уже зарабатывают с Альпари</p>
+        <div class="testimonials-grid">
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">
+                    За 6 месяцев привлек 47 трейдеров через свой Telegram-канал. Средний доход — около $2,400 в месяц.
+                    Выплаты стабильные, поддержка отличная.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">АК</div>
+                    <div class="author-info">
+                        <h4>Алексей К.</h4>
+                        <span>Трейдер и блогер</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">
+                    Разместил реферальную ссылку на форуме и забыл. Через 3 месяца обнаружил на счету $890.
+                    Пассивный доход в чистом виде!
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">ДМ</div>
+                    <div class="author-info">
+                        <h4>Дмитрий М.</h4>
+                        <span>Частный инвестор</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial fade-in">
+                <p class="testimonial-text">
+                    Работаю с Альпари как IB уже 2 года. Комиссия до 60%, удобный кабинет, много инструментов для привлечения.
+                    Рекомендую всем, кто хочет монетизировать аудиторию.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">ЕС</div>
+                    <div class="author-info">
+                        <h4>Елена С.</h4>
+                        <span>Introducing Broker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-cta">
+        <h2>Готовы начать зарабатывать?</h2>
+        <p>Присоединяйтесь к партнерской программе Альпари и превращайте ваши связи в стабильный доход</p>
+        <a href="#referral" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;" onclick="scrollToRef(event)">
+            Начать сейчас
+        </a>
+    </section>
+
+    <footer>
+        <div class="risk-warning">
+            <strong>Важно:</strong> Торговля на финансовых рынках сопряжена с высоким риском.
+            71.99% розничных инвесторов теряют деньги при торговле CFD.
+            Инвестируйте только тот капитал, который готовы потерять.
+            Данный сайт создан партнером Альпари и не является официальным сайтом компании.
+        </div>
+        <p>© 2026 Альпари Партнер. Все права защищены.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.6;">Alpari является зарегистрированной торговой маркой.</p>
+    </footer>
+
+    <script>
+        const pairs = [
+            {name: 'EUR/USD', price: 1.0845, change: 0.12},
+            {name: 'GBP/USD', price: 1.2678, change: -0.05},
+            {name: 'USD/JPY', price: 151.34, change: 0.23},
+            {name: 'USD/CHF', price: 0.9034, change: -0.11},
+            {name: 'AUD/USD', price: 0.6543, change: 0.08},
+            {name: 'USD/CAD', price: 1.3567, change: -0.03},
+            {name: 'EUR/GBP', price: 0.8567, change: 0.15},
+            {name: 'XAU/USD', price: 2345.60, change: 1.23},
+            {name: 'BTC/USD', price: 67432.50, change: 2.45},
+            {name: 'ETH/USD', price: 3456.80, change: 1.89},
+        ];
+
+        function initTicker() {
+            const ticker = document.getElementById('ticker');
+            let html = '';
+            [...pairs, ...pairs].forEach(pair => {
+                const isUp = pair.change >= 0;
+                const arrow = isUp ? '▲' : '▼';
+                const cls = isUp ? 'ticker-up' : 'ticker-down';
+                const sign = isUp ? '+' : '';
+                html += `<div class="ticker-item ${cls}"><strong>${pair.name}</strong><span>${pair.price.toFixed(pair.price > 1000 ? 2 : 4)}</span><span>${arrow} ${sign}${pair.change}%</span></div>`;
+            });
+            ticker.innerHTML = html;
+        }
+
+        function updateCalc() {
+            const traders = parseInt(document.getElementById('traders').value);
+            const lots = parseInt(document.getElementById('lots').value);
+            const commission = parseFloat(document.getElementById('commission').value);
+            document.getElementById('traders-val').textContent = traders;
+            document.getElementById('lots-val').textContent = lots;
+            document.getElementById('commission-val').textContent = '$' + commission;
+            const monthly = traders * lots * commission;
+            document.getElementById('result').textContent = '$' + monthly.toLocaleString();
+        }
+
+        function copyLink() {
+            const link = document.getElementById('refLink').textContent.trim();
+            navigator.clipboard.writeText(link).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const original = btn.innerHTML;
+                btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Скопировано!`;
+                btn.classList.add('copied');
+                setTimeout(() => { btn.innerHTML = original; btn.classList.remove('copied'); }, 2000);
+            });
+        }
+
+        function share(platform) {
+            const url = encodeURIComponent(document.getElementById('refLink').textContent.trim());
+            const text = encodeURIComponent('Присоединяйся к Альпари и получи бонус до $500! Торгуй с надежным брокером с 1998 года.');
+            let shareUrl = '';
+            switch(platform) {
+                case 'telegram': shareUrl = `https://t.me/share/url?url=${url}&text=${text}`; break;
+                case 'whatsapp': shareUrl = `https://wa.me/?text=${text}%20${url}`; break;
+                case 'vk': shareUrl = `https://vk.com/share.php?url=${url}&title=${text}`; break;
+            }
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function scrollToRef(e) { e.preventDefault(); document.getElementById('referral').scrollIntoView({behavior: 'smooth'}); }
+        function scrollToCalc(e) { e.preventDefault(); document.getElementById('calculator').scrollIntoView({behavior: 'smooth'}); }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, {threshold: 0.1});
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        initTicker();
+        updateCalc();
+
+        setInterval(() => {
+            pairs.forEach(pair => {
+                const change = (Math.random() - 0.5) * 0.5;
+                pair.price *= (1 + change / 100);
+                pair.change += change;
+            });
+            initTicker();
+        }, 5000);
+    </script>
+</body>
+</html>
