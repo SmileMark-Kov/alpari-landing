@@ -1,0 +1,34 @@
+#EXTM3U
+
+#EXTINF:-1 tvg-id="DW.de@Russian" group-title="Германия • на русском",DW Russian
+https://dwamdstream110.akamaized.net/hls/live/2017971/dwstream110/master.m3u8
+
+#EXTINF:-1 tvg-id="EuronewsRussian.fr@SD" group-title="Европа • на русском",Euronews Russian
+https://cdn-euronews.akamaized.net/live/eds/euronews-ru/25071/index.m3u8
+
+#EXTINF:-1 tvg-id="CGTNRussian.cn@SD" group-title="Китай • на русском",CGTN Русский
+https://russian-livews.cgtn.com/hls/LSvexABhNipibK5KRuUkvHZ7220802LSTeze9o8tdFXMHsb1VosgoT220802cd/playlist.m3u8
+
+#EXTINF:-1 tvg-id="Channel9.il@SD" group-title="Израиль • на русском",9 Канал Израиль
+https://contact.gostreaming.tv/Con-11/index.m3u8
+
+#EXTINF:-1 tvg-id="RTViUS.us@SD" group-title="США • на русском",RTVi US
+https://amg17233-amg17233c1-wisptv-us-6409.playouts.now.amagi.tv/playlist.m3u8
+
+#EXTINF:-1 tvg-id="CurrentTimeTV.cz@SD" group-title="Чехия • на русском",Настоящее Время
+https://rfe-ingest.akamaized.net/hls/live/2033043/tvmc05/master.m3u8
+
+#EXTINF:-1 tvg-id="FREEDOM.ua@SD" group-title="Украина • на русском",FREEДОМ
+https://freedom.cdn-01.cosmonova.net.ua/mobile-app/main/freedom/master.m3u8
+
+#EXTINF:-1 tvg-id="AngelTV.in@Russian" group-title="Индия • на русском",Angel TV Russian
+https://janya-digimix.akamaized.net/vglive-sk-955415/russia/ngrp:angelrussia_all/playlist.m3u8
+
+#EXTINF:-1 tvg-id="24KZ.kz@SD" group-title="Казахстан • русский/казахский",24KZ
+https://fs.uplink.kz/24KZ/mono.m3u8?token=onlinetv
+
+#EXTINF:-1 tvg-id="AtamekenBusiness.kz@SD" group-title="Казахстан • русский/казахский",Atameken Business
+https://fs.uplink.kz/atameken/mono.m3u8?token=onlinetv
+
+#EXTINF:-1 tvg-id="Channel7.kz@SD" group-title="Казахстан • русский/казахский",7 Канал Казахстан
+https://fs.uplink.kz/7_kanal/mono.m3u8?token=onlinetv
